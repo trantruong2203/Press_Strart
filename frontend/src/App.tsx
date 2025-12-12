@@ -4,6 +4,7 @@ import "./App.css";
 import { ContextAuth } from "./contexts/AuthContext";
 import HomeAdmin from "./page/admin/HomeAdmin";
 import Home from "./page/client/Home";
+import GameDetail from "./page/client/GameDetail";
 import { Toaster } from "react-hot-toast";
 import Login from "./page/auth/Login";
 import Signup from "./page/auth/Signup";
@@ -27,6 +28,7 @@ function App() {
           path="/*"
           element={accountRole === "admin" ? <HomeAdmin /> : <Home />}
         />
+        <Route path="/game/:id" element={<GameDetail />} />
       </Routes>
       <Toaster position="top-right" />
     </>

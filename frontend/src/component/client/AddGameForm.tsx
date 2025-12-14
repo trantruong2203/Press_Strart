@@ -1,4 +1,4 @@
-import { Button, MenuItem, Select, TextField, styled } from "@mui/material";
+import { Button, CircularProgress, MenuItem, Select, TextField, styled } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState, AppDispatch } from "../../store/store";
 import { handleChange, resetProduct } from "../../features/production/ProductSlice";
@@ -38,7 +38,7 @@ function AddGameForm({ selectedProduct, isAddNewGame }: AddGameFormProps) {
   const [previewBanner, setPreviewBanner] = useState<string>("");
   const [previewListImg, setPreviewListImg] = useState<string[]>([]);
   const [isUploadingBanner, setIsUploadingBanner] = useState<boolean>(false);
-
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   useEffect(() => {
     if (selectedProduct && !isUploadingBanner && !isAddNewGame) {
       // Set preview images cho chế độ chỉnh sửa
@@ -160,6 +160,7 @@ function AddGameForm({ selectedProduct, isAddNewGame }: AddGameFormProps) {
   };
 
   const handleSubmit = async () => {
+    setIsSubmitting(true);
     try {
       // Validation cơ bản
       if (!productData.name.trim()) {
@@ -194,6 +195,8 @@ function AddGameForm({ selectedProduct, isAddNewGame }: AddGameFormProps) {
     } catch (error) {
       console.error("Lỗi khi tạo game:", error);
       toast.error("Có lỗi xảy ra khi tạo game");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -540,8 +543,27 @@ function AddGameForm({ selectedProduct, isAddNewGame }: AddGameFormProps) {
       </div>
 
       <div className="mt-8">
-        <Button variant="contained" color="primary" onClick={handleSubmit}>
-          ✨ Thêm Game
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleSubmit}
+          disabled={isSubmitting}
+          sx={{ position: 'relative' }}
+        >
+          {isSubmitting && (
+            <CircularProgress
+              size={24}
+              sx={{
+                color: 'primary.light',
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                marginTop: '-12px',
+                marginLeft: '-12px',
+              }}
+            />
+          )}
+          {isSubmitting ? 'Đang thêm...' : '✨ Thêm Game'}
         </Button>
       </div>
     </div>

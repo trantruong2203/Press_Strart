@@ -10,9 +10,11 @@ import {
 	Typography,
 	Paper,
 	Divider,
+	LinearProgress,
 } from '@mui/material';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { createUser } from '../../features/users/UsersThunks';
+import { calculatePasswordStrength } from '../../utils/passwordStrength';
 import { useDispatch } from 'react-redux';
 import type { AppDispatch } from '../../store/store';
 import type { UserResponse } from '../../interface/UserResponse';
@@ -32,6 +34,7 @@ export default function Signup() {
 		confirmPassword: '',
 	});
 	const [showPassword, setShowPassword] = useState<boolean>(false);
+	const [passwordStrength, setPasswordStrength] = useState<number>(0);
 	const [submitting, setSubmitting] = useState<boolean>(false);
 	const [error, setError] = useState<string>('');
 	const [successMsg, setSuccessMsg] = useState<string>('');
@@ -50,7 +53,28 @@ export default function Signup() {
 
 	function handleChange<K extends keyof FormState>(key: K, value: FormState[K]) {
 		setForm((prev) => ({ ...prev, [key]: value }));
+		if (key === 'password') {
+			setPasswordStrength(calculatePasswordStrength(value as string));
+		}
 	}
+
+	const passwordStrengthLabel = (score: number) => {
+		switch (score) {
+			case 0:
+			case 1:
+				return 'Rất yếu';
+			case 2:
+				return 'Yếu';
+			case 3:
+				return 'Trung bình';
+			case 4:
+				return 'Mạnh';
+			case 5:
+				return 'Rất mạnh';
+			default:
+				return '';
+		}
+	};
 
 	async function handleSubmit(e: FormEvent) {
 		e.preventDefault();
@@ -193,6 +217,40 @@ export default function Signup() {
 							}}
 							sx={muiTextFieldSx}
 						/>
+
+						{form.password && (
+							<Box sx={{ mt: 1 }}>
+								<LinearProgress
+									variant="determinate"
+									value={passwordStrength * 20}
+									sx={{
+										height: '8px',
+										borderRadius: '4px',
+										'& .MuiLinearProgress-bar': {
+											backgroundColor:
+												passwordStrength < 2
+													? '#f44336'
+													: passwordStrength < 4
+													? '#ff9800'
+													: '#4caf50',
+										},
+									}}
+								/>
+								<Typography
+									variant="caption"
+									sx={{
+										color:
+											passwordStrength < 2
+												? '#f44336'
+												: passwordStrength < 4
+												? '#ff9800'
+												: '#4caf50',
+									}}
+								>
+									{passwordStrengthLabel(passwordStrength)}
+								</Typography>
+							</Box>
+						)}
 
 						<TextField
 							label="Xác nhận mật khẩu"

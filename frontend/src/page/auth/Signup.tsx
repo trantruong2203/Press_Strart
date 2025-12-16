@@ -32,6 +32,7 @@ export default function Signup() {
 		confirmPassword: '',
 	});
 	const [showPassword, setShowPassword] = useState<boolean>(false);
+	const [showConfirmPassword, setShowConfirmPassword] = useState<boolean>(false);
 	const [submitting, setSubmitting] = useState<boolean>(false);
 	const [error, setError] = useState<string>('');
 	const [successMsg, setSuccessMsg] = useState<string>('');
@@ -196,7 +197,7 @@ export default function Signup() {
 
 						<TextField
 							label="Xác nhận mật khẩu"
-							type={showPassword ? 'text' : 'password'}
+							type={showConfirmPassword ? 'text' : 'password'}
 							placeholder="Nhập lại mật khẩu"
 							fullWidth
 							margin="normal"
@@ -206,6 +207,28 @@ export default function Signup() {
 							helperText={!passwordsMatch && form.confirmPassword.length > 0 ? 'Mật khẩu không khớp.' : ' '}
 							error={!passwordsMatch && form.confirmPassword.length > 0}
 							variant="outlined"
+							InputProps={{
+								endAdornment: (
+									<InputAdornment position="end">
+										<IconButton
+											onClick={() => setShowConfirmPassword((s) => !s)}
+											edge="end"
+											aria-label="toggle password visibility"
+											sx={{
+												color: '#06b6d4',
+												'&:hover': {
+													color: '#8b5cf6',
+													backgroundColor: 'rgba(6, 182, 212, 0.1)',
+													transform: 'scale(1.1)',
+													transition: 'all 0.2s ease'
+												}
+											}}
+										>
+											{showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+										</IconButton>
+									</InputAdornment>
+								),
+							}}
 							sx={muiTextFieldSx}
 						/>
 

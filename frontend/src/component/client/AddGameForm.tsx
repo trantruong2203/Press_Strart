@@ -1,4 +1,4 @@
-import { Button, MenuItem, Select, TextField, styled } from "@mui/material";
+import { Button, MenuItem, Select, TextField, styled, CircularProgress, useTheme } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import type { RootState, AppDispatch } from "../../store/store";
 import { handleChange, resetProduct } from "../../features/production/ProductSlice";
@@ -30,6 +30,7 @@ const VisuallyHiddenInput = styled("input")({
 });
 
 function AddGameForm({ selectedProduct, isAddNewGame }: AddGameFormProps) {
+  const theme = useTheme();
   const { items: platforms } = useSelector(
     (state: RootState) => state.platform
   );
@@ -38,6 +39,7 @@ function AddGameForm({ selectedProduct, isAddNewGame }: AddGameFormProps) {
   const [previewBanner, setPreviewBanner] = useState<string>("");
   const [previewListImg, setPreviewListImg] = useState<string[]>([]);
   const [isUploadingBanner, setIsUploadingBanner] = useState<boolean>(false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   useEffect(() => {
     if (selectedProduct && !isUploadingBanner && !isAddNewGame) {
@@ -161,6 +163,7 @@ function AddGameForm({ selectedProduct, isAddNewGame }: AddGameFormProps) {
 
   const handleSubmit = async () => {
     try {
+      setIsSubmitting(true);
       // Validation cơ bản
       if (!productData.name.trim()) {
         toast.error("Vui lòng nhập tên game");
@@ -194,6 +197,8 @@ function AddGameForm({ selectedProduct, isAddNewGame }: AddGameFormProps) {
     } catch (error) {
       console.error("Lỗi khi tạo game:", error);
       toast.error("Có lỗi xảy ra khi tạo game");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -540,8 +545,23 @@ function AddGameForm({ selectedProduct, isAddNewGame }: AddGameFormProps) {
       </div>
 
       <div className="mt-8">
-        <Button variant="contained" color="primary" onClick={handleSubmit}>
-          ✨ Thêm Game
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleSubmit}
+          disabled={isSubmitting}
+          sx={{
+            '&.Mui-disabled': {
+              backgroundColor: theme.palette.grey[700],
+              color: theme.palette.grey[500],
+            },
+          }}
+        >
+          {isSubmitting ? (
+            <CircularProgress size={24} color="inherit" />
+          ) : (
+            "✨ Thêm Game"
+          )}
         </Button>
       </div>
     </div>

@@ -141,6 +141,7 @@ export default function Login() {
               error={formik.touched.email && !!formik.errors.email}
               variant="outlined"
               sx={muiTextFieldSx}
+              FormHelperTextProps={{ "aria-live": "polite" }}
             />
 
             <TextField
@@ -156,6 +157,7 @@ export default function Login() {
               helperText={formik.touched.password && formik.errors.password}
               error={formik.touched.password && !!formik.errors.password}
               variant="outlined"
+              FormHelperTextProps={{ "aria-live": "polite" }}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">

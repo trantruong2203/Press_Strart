@@ -162,7 +162,7 @@ export default function Login() {
                     <IconButton
                       onClick={() => setShowPassword((s) => !s)}
                       edge="end"
-                      aria-label="toggle password visibility"
+                      aria-label={showPassword ? "hide password" : "show password"}
                       sx={{
                         color: "#06b6d4",
                         "&:hover": {

@@ -10,6 +10,7 @@ import {
   Typography,
   Paper,
   Divider,
+  CircularProgress,
 } from "@mui/material";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useDispatch } from "react-redux";
@@ -34,7 +35,6 @@ export default function Login() {
     validationSchema: loginSchema,
     onSubmit: async (values: FormState) => {
       try {
-        setSubmitting(true);
         await dispatch(
           loginUser({
             email: values.email,
@@ -45,13 +45,10 @@ export default function Login() {
         navigate("/");
       } catch (error: unknown) {
         console.error(error);
-      } finally {
-        setSubmitting(false);
       }
     },
   });
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [submitting, setSubmitting] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
@@ -231,7 +228,11 @@ export default function Login() {
                 },
               }}
             >
-              {submitting ? "Đang đăng nhập..." : "Đăng nhập"}
+              {formik.isSubmitting ? (
+                <CircularProgress size={24} sx={{ color: "white" }} />
+              ) : (
+                "Đăng nhập"
+              )}
             </Button>
 
             <Divider

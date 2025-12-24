@@ -133,6 +133,7 @@ export default function Login() {
               name="email"
               fullWidth
               margin="normal"
+              required
               value={formik.values.email}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
@@ -149,6 +150,7 @@ export default function Login() {
               name="password"
               fullWidth
               margin="normal"
+              required
               value={formik.values.password}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}

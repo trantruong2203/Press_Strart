@@ -132,6 +132,7 @@ export default function Login() {
               label="Email"
               name="email"
               fullWidth
+              autoComplete="email"
               margin="normal"
               value={formik.values.email}
               onChange={formik.handleChange}
@@ -147,6 +148,7 @@ export default function Login() {
               label="Mật khẩu"
               type={showPassword ? "text" : "password"}
               name="password"
+              autoComplete="current-password"
               fullWidth
               margin="normal"
               value={formik.values.password}

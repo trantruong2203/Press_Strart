@@ -1,0 +1,3 @@
+## 2024-07-25 - Avoid Committing Lockfiles for Minor Changes
+**Learning:** Committing `pnpm-lock.yaml` for a frontend-only, micro-UX change is considered an out-of-scope side effect. It adds significant noise to the pull request, makes the reviewer's job harder, and can introduce unintended dependency shifts. The change was blocked until the lockfile was removed.
+**Action:** In the future, I must be vigilant about checking my staged files before committing. I will explicitly discard any changes to `pnpm-lock.yaml` unless the task's core purpose is to add, remove, or update a dependency. This keeps the PR focused and respects the repository's dependency integrity.

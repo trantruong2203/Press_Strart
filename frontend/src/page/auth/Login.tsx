@@ -141,12 +141,14 @@ export default function Login() {
               error={formik.touched.email && !!formik.errors.email}
               variant="outlined"
               sx={muiTextFieldSx}
+              autoComplete="email"
             />
 
             <TextField
               label="Mật khẩu"
               type={showPassword ? "text" : "password"}
               name="password"
+              autoComplete="current-password"
               fullWidth
               margin="normal"
               value={formik.values.password}

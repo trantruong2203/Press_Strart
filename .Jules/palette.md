@@ -1,0 +1,3 @@
+## 2024-08-05 - Improve Login Form Accessibility with AutoComplete
+**Learning:** I identified that the login form was missing `autoComplete` attributes, which hinders browser autofill and password manager integration, creating unnecessary friction for users.
+**Action:** I will add `autoComplete="email"` and `autoComplete="current-password"` to the respective fields to ensure a smoother and more accessible login experience.

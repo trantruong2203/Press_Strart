@@ -34,7 +34,6 @@ export default function Login() {
     validationSchema: loginSchema,
     onSubmit: async (values: FormState) => {
       try {
-        setSubmitting(true);
         await dispatch(
           loginUser({
             email: values.email,
@@ -45,13 +44,10 @@ export default function Login() {
         navigate("/");
       } catch (error: unknown) {
         console.error(error);
-      } finally {
-        setSubmitting(false);
       }
     },
   });
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [submitting, setSubmitting] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
@@ -231,7 +227,7 @@ export default function Login() {
                 },
               }}
             >
-              {submitting ? "Đang đăng nhập..." : "Đăng nhập"}
+              {formik.isSubmitting ? "Đang đăng nhập..." : "Đăng nhập"}
             </Button>
 
             <Divider

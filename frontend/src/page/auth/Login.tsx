@@ -131,6 +131,7 @@ export default function Login() {
             <TextField
               label="Email"
               name="email"
+              autoComplete="email"
               fullWidth
               margin="normal"
               value={formik.values.email}
@@ -146,6 +147,7 @@ export default function Login() {
             <TextField
               label="Mật khẩu"
               type={showPassword ? "text" : "password"}
+              autoComplete="current-password"
               name="password"
               fullWidth
               margin="normal"

@@ -1,0 +1,5 @@
+## 2024-07-25 - The Sanctity of Lock Files
+
+**Learning:** Accidentally deleting the `package-lock.json` file is a critical, blocking error that can destabilize the entire project by causing inconsistent dependency versions across different environments. The presence of a `package-lock.json` indicates that `npm` is likely the project's intended package manager, even if instructions mention `pnpm`. This conflict must be investigated, not ignored. My role is to make micro-UX improvements, not to alter the project's dependency management foundation.
+
+**Action:** Never, under any circumstances, delete a lock file (`package-lock.json`, `pnpm-lock.yaml`, `yarn.lock`) unless explicitly and correctly migrating package managers, which is far outside my scope. If I see a `package-lock.json`, I will assume `npm` is the source of truth for dependencies and will not run `pnpm install` which would generate a conflicting `pnpm-lock.yaml`. I must only commit changes directly related to my UX task.

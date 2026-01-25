@@ -147,6 +147,7 @@ export default function Signup() {
 						<TextField
 							label="Email"
 							type="email"
+							autoComplete="email"
 							placeholder="you@example.com"
 							fullWidth
 							margin="normal"
@@ -162,6 +163,7 @@ export default function Signup() {
 						<TextField
 							label="Mật khẩu"
 							type={showPassword ? 'text' : 'password'}
+							autoComplete="new-password"
 							placeholder="Tối thiểu 8 ký tự, có chữ và số"
 							fullWidth
 							margin="normal"
@@ -197,6 +199,7 @@ export default function Signup() {
 						<TextField
 							label="Xác nhận mật khẩu"
 							type={showPassword ? 'text' : 'password'}
+							autoComplete="new-password"
 							placeholder="Nhập lại mật khẩu"
 							fullWidth
 							margin="normal"

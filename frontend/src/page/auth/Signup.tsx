@@ -133,6 +133,7 @@ export default function Signup() {
 
 					<Box component="form" onSubmit={handleSubmit} noValidate>
 						<TextField
+							autoComplete="username"
 							label="Tên hiển thị"
 							placeholder="Ví dụ: gamer_pro"
 							fullWidth
@@ -145,6 +146,7 @@ export default function Signup() {
 						/>
 
 						<TextField
+							autoComplete="email"
 							label="Email"
 							type="email"
 							placeholder="you@example.com"
@@ -160,6 +162,7 @@ export default function Signup() {
 						/>
 
 						<TextField
+							autoComplete="new-password"
 							label="Mật khẩu"
 							type={showPassword ? 'text' : 'password'}
 							placeholder="Tối thiểu 8 ký tự, có chữ và số"
@@ -195,6 +198,7 @@ export default function Signup() {
 						/>
 
 						<TextField
+							autoComplete="new-password"
 							label="Xác nhận mật khẩu"
 							type={showPassword ? 'text' : 'password'}
 							placeholder="Nhập lại mật khẩu"

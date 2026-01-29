@@ -129,6 +129,7 @@ export default function Login() {
 
           <Box component="form" onSubmit={formik.handleSubmit} noValidate>
             <TextField
+              autoComplete="email"
               label="Email"
               name="email"
               fullWidth
@@ -144,6 +145,7 @@ export default function Login() {
             />
 
             <TextField
+              autoComplete="current-password"
               label="Mật khẩu"
               type={showPassword ? "text" : "password"}
               name="password"

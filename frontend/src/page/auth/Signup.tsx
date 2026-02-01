@@ -135,6 +135,7 @@ export default function Signup() {
 						<TextField
 							label="Tên hiển thị"
 							placeholder="Ví dụ: gamer_pro"
+							autoComplete="name"
 							fullWidth
 							margin="normal"
 							value={form.displayName}
@@ -148,6 +149,7 @@ export default function Signup() {
 							label="Email"
 							type="email"
 							placeholder="you@example.com"
+							autoComplete="email"
 							fullWidth
 							margin="normal"
 							value={form.email}
@@ -163,6 +165,7 @@ export default function Signup() {
 							label="Mật khẩu"
 							type={showPassword ? 'text' : 'password'}
 							placeholder="Tối thiểu 8 ký tự, có chữ và số"
+							autoComplete="new-password"
 							fullWidth
 							margin="normal"
 							value={form.password}
@@ -198,6 +201,7 @@ export default function Signup() {
 							label="Xác nhận mật khẩu"
 							type={showPassword ? 'text' : 'password'}
 							placeholder="Nhập lại mật khẩu"
+							autoComplete="new-password"
 							fullWidth
 							margin="normal"
 							value={form.confirmPassword}

@@ -1,0 +1,17 @@
+
+> backend@1.0.0 dev /app/backend
+> ts-node-dev -r dotenv/config --respawn --transpile-only server.ts
+
+[INFO] 08:50:21 ts-node-dev ver. 2.0.0 (using ts-node ver. 10.9.2, typescript ver. 5.9.3)
+Error: No database connection string was provided to `neon()`. Perhaps an environment variable has not been set?
+    at neon (/app/backend/node_modules/.pnpm/@neondatabase+serverless@1.0.2/node_modules/@neondatabase/serverless/index.js:1272:57)
+    at Object.<anonymous> (/app/backend/src/config/db.ts:4:17)
+    at Module.<anonymous> (node:internal/modules/cjs/loader:1706:14)
+    at Module._compile (/app/backend/node_modules/.pnpm/source-map-support@0.5.21/node_modules/source-map-support/source-map-support.js:568:25)
+    at Module.m._compile (/tmp/ts-node-dev-hook-09266598820811334.js:69:33)
+    at node:internal/modules/cjs/loader:1839:10
+    at require.extensions..jsx.require.extensions..js (/tmp/ts-node-dev-hook-09266598820811334.js:114:20)
+    at require.extensions.<computed> (/tmp/ts-node-dev-hook-09266598820811334.js:71:20)
+    at Object.nodeDevHook [as .ts] (/app/backend/node_modules/.pnpm/ts-node-dev@2.0.0_@types+node@24.10.9_typescript@5.9.3/node_modules/ts-node-dev/lib/hook.js:63:13)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+[ERROR] 08:50:21 Error: No database connection string was provided to `neon()`. Perhaps an environment variable has not been set?

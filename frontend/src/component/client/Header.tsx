@@ -25,7 +25,7 @@ import { getAllCartItemsThunk } from "../../features/cart_items/CartItemsThunks"
 import { setCartOpen } from "../../features/cart_items/CartItemsSlices";
 import CartMenu from "./home/CartMenu";
 
-function Header() {
+function Header({ handleOpen }: { handleOpen?: () => void }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { accountLogin } = useContext(ContextAuth);
   const [openUserMenu, setOpenUserMenu] = useState(false);
@@ -119,6 +119,7 @@ function Header() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search games, DLCs, or genres..."
+              aria-label="Search games"
               className="w-full bg-[#1f2b1b] text-white rounded-full px-12 py-3 outline-none border-none focus:ring-2 focus:ring-[#4cdf20]"
             />
           </div>
@@ -128,7 +129,10 @@ function Header() {
         <div className="flex items-center gap-4">
 
           {/* Notifications */}
-          <button className="relative text-gray-300 hover:text-white">
+          <button
+            className="relative text-gray-300 hover:text-white"
+            aria-label="Notifications"
+          >
             <FaBell className="text-lg" />
             <span className="absolute top-0 right-0 w-2 h-2 bg-[#4cdf20] rounded-full"></span>
           </button>
@@ -138,6 +142,7 @@ function Header() {
             <button
               onClick={() => dispatch(setCartOpen(true))}
               className="text-gray-300 hover:text-white"
+              aria-label="Shopping Cart"
             >
               <FaShoppingCart className="text-lg" />
             </button>
@@ -148,6 +153,7 @@ function Header() {
             <button
               onClick={() => setOpenUserMenu(true)}
               className="flex items-center gap-2"
+              aria-label="User Menu"
             >
               <div className="w-10 h-10 rounded-full bg-gray-600" />
             </button>
@@ -155,6 +161,7 @@ function Header() {
             <Link
               to="/login"
               className="text-gray-300 hover:text-white transition"
+              aria-label="Login"
             >
               <FaUser className="text-lg" />
             </Link>
@@ -164,6 +171,7 @@ function Header() {
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="md:hidden text-gray-300 hover:text-white"
+            aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
           >
             {isMenuOpen ? <FaTimes /> : <FaBars />}
           </button>
@@ -179,6 +187,7 @@ function Header() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search games..."
+              aria-label="Search games"
               className="w-full bg-[#1f2b1b] text-white rounded-full px-12 py-3 outline-none"
             />
           </div>
@@ -187,6 +196,14 @@ function Header() {
 
       {/* Desktop nav */}
       <div className="hidden lg:flex max-w-[1440px] mx-auto px-4 py-3 gap-4">
+        <button
+          onClick={handleOpen}
+          className="flex items-center gap-2 text-gray-300 hover:text-white hover:scale-105 transition mr-4"
+          aria-label="Open Categories"
+        >
+          <FaBars className="text-[#4cdf20]" />
+          <span className="text-sm font-bold uppercase">Danh mục</span>
+        </button>
         {navigationItems.map((item, idx) => (
           <button
             key={idx}

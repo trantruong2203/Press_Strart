@@ -10,6 +10,7 @@ import {
   Typography,
   Paper,
   Divider,
+  CircularProgress,
 } from "@mui/material";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useDispatch } from "react-redux";
@@ -34,7 +35,6 @@ export default function Login() {
     validationSchema: loginSchema,
     onSubmit: async (values: FormState) => {
       try {
-        setSubmitting(true);
         await dispatch(
           loginUser({
             email: values.email,
@@ -45,13 +45,10 @@ export default function Login() {
         navigate("/");
       } catch (error: unknown) {
         console.error(error);
-      } finally {
-        setSubmitting(false);
       }
     },
   });
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [submitting, setSubmitting] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
@@ -131,6 +128,8 @@ export default function Login() {
             <TextField
               label="Email"
               name="email"
+              type="email"
+              autoComplete="email"
               fullWidth
               margin="normal"
               value={formik.values.email}
@@ -147,6 +146,7 @@ export default function Login() {
               label="Mật khẩu"
               type={showPassword ? "text" : "password"}
               name="password"
+              autoComplete="current-password"
               fullWidth
               margin="normal"
               value={formik.values.password}
@@ -186,6 +186,7 @@ export default function Login() {
               fullWidth
               variant="contained"
               disabled={formik.isSubmitting || !formik.isValid}
+              aria-label={formik.isSubmitting ? "Đang đăng nhập" : "Đăng nhập"}
               sx={{
                 mt: 2,
                 py: 1.5,
@@ -231,7 +232,11 @@ export default function Login() {
                 },
               }}
             >
-              {submitting ? "Đang đăng nhập..." : "Đăng nhập"}
+              {formik.isSubmitting ? (
+                <CircularProgress size={24} color="inherit" />
+              ) : (
+                "Đăng nhập"
+              )}
             </Button>
 
             <Divider

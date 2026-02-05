@@ -1,0 +1,3 @@
+## 2026-02-05 - [Auth Form UX & Accessibility]
+**Learning:** Auth forms in this repository lacked standard browser automation (autoComplete, autoFocus) and used static text for loading states. When replacing button text with visual spinners (MUI CircularProgress) during submission, an `aria-label` is required to ensure screen reader users still understand the button's purpose and current state.
+**Action:** Always include `autoFocus` on the first input of a form, use semantic `autoComplete` values (e.g., 'email', 'current-password', 'new-password', 'name'), and provide a dynamic `aria-label` for buttons that change state visually.

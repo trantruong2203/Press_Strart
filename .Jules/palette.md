@@ -1,0 +1,3 @@
+## 2025-05-14 - [Auth Form Micro-UX & Staging Guardrails]
+**Learning:** Auth forms in this repo lacked standard browser features like autoFocus and autoComplete, and replaced visible text with loaders without ARIA feedback. Additionally, running 'pnpm install' in the frontend generates a massive lockfile that must not be committed to keep PRs focused and under line-count constraints.
+**Action:** Always include 'autoFocus' on the first field of dedicated auth pages and 'autoComplete' on all fields. When using visual loaders like CircularProgress in buttons, always add a dynamic 'aria-label' in the local language (Vietnamese) to maintain accessibility. Ensure 'pnpm-lock.yaml' is excluded from commits.

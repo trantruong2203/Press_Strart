@@ -10,6 +10,7 @@ import {
 	Typography,
 	Paper,
 	Divider,
+	CircularProgress,
 } from '@mui/material';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { createUser } from '../../features/users/UsersThunks';
@@ -134,7 +135,10 @@ export default function Signup() {
 					<Box component="form" onSubmit={handleSubmit} noValidate>
 						<TextField
 							label="Tên hiển thị"
+							name="displayName"
 							placeholder="Ví dụ: gamer_pro"
+							autoFocus
+							autoComplete="name"
 							fullWidth
 							margin="normal"
 							value={form.displayName}
@@ -146,8 +150,10 @@ export default function Signup() {
 
 						<TextField
 							label="Email"
+							name="email"
 							type="email"
 							placeholder="you@example.com"
+							autoComplete="email"
 							fullWidth
 							margin="normal"
 							value={form.email}
@@ -161,8 +167,10 @@ export default function Signup() {
 
 						<TextField
 							label="Mật khẩu"
+							name="password"
 							type={showPassword ? 'text' : 'password'}
 							placeholder="Tối thiểu 8 ký tự, có chữ và số"
+							autoComplete="new-password"
 							fullWidth
 							margin="normal"
 							value={form.password}
@@ -196,8 +204,10 @@ export default function Signup() {
 
 						<TextField
 							label="Xác nhận mật khẩu"
+							name="confirmPassword"
 							type={showPassword ? 'text' : 'password'}
 							placeholder="Nhập lại mật khẩu"
+							autoComplete="new-password"
 							fullWidth
 							margin="normal"
 							value={form.confirmPassword}
@@ -221,6 +231,7 @@ export default function Signup() {
 							fullWidth
 							variant="contained"
 							disabled={!canSubmit}
+							aria-label={submitting ? 'Đang tạo' : 'Tạo tài khoản'}
 							sx={{
 								mt: 2,
 								py: 1.5,
@@ -261,7 +272,7 @@ export default function Signup() {
 								}
 							}}
 						>
-							{submitting ? 'Đang tạo...' : 'Tạo tài khoản'}
+							{submitting ? <CircularProgress size={24} color="inherit" /> : 'Tạo tài khoản'}
 						</Button>
 
 						<Divider sx={{ 
